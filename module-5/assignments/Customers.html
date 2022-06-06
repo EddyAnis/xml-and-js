@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <ol id="customers"></ol>
+    <script>
+function loadXMLDoc() {
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+ if (this.readyState == 4 && this.status == 200) {
+  myFunction(this);
+ }
+};
+xmlhttp.open("GET", "./customers.xml", true);
+xmlhttp.send();
+}
+function myFunction(xml) {
+var i;
+var xmlDoc = xml.responseXML;
+var table = "<tr><th>CustomerID</th><th>Name</th><th>Address</th><th>Phone</th><th>Email</th><th>OrderID</th><th>OrderBy</th><th>OrderDate</th><th>ItemPrice</th><th>ItemQty</th></tr>";
+var x = xmlDoc.getElementsByTagName("customer");
+for (i = 0; i < x.length; i++) {
+ table += "<tr><td>" +
+  x[i].getElementsByTagName("custID")[0].childNodes[0].nodeValue +
+  "</td><td>" +
+  x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue +
+  "</td><td>" +
+  x[i].getElementsByTagName("address")[0].childNodes[0].nodeValue +
+  "</td><td>" +
+  x[i].getElementsByTagName("phone")[0].childNodes[0].nodeValue +
+  "</td><td>" +
+  x[i].getElementsByTagName("email")[0].childNodes[0].nodeValue +
+  "</td><td>" +
+  x[i].getElementsByTagName("orderID")[0].childNodes[0].nodeValue +
+  "</td><td>" +
+  x[i].getElementsByTagName("orderBy")[0].childNodes[0].nodeValue +
+  "</td><td>" +
+  x[i].getElementsByTagName("orderDate")[0].childNodes[0].nodeValue +
+  "</td><td>" +
+  x[i].getElementsByTagName("itemPrice")[0].childNodes[0].nodeValue +
+  "</td><td>" +
+  x[i].getElementsByTagName("itemQty")[0].childNodes[0].nodeValue +
+  "</td></tr>";
+}
+document.getElementById("demo").innerHTML = table;
+}
+</script>
+  </body>
+</html>
